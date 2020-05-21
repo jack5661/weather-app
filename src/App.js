@@ -25,14 +25,14 @@ class App extends React.Component {
 
   async searchWeather() {
     try {
-      const info = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${process.env.REACT_APP_API_KEY}`);
+      const info = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${process.env.REACT_APP_API_KEY}`, {mode: "cors",});
       const weather = await info.json();
       console.log(this.state.city);
       this.setState({
         city: this.state.city,
         weather: weather.weather[0].main,
         desc: weather.weather[0].description,
-        icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`,
+        icon: `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`,
         temp: Math.round(weather.main.temp - 273.15),
         windSpeed: weather.wind.speed, 
         background: `url("https://source.unsplash.com/1600x900/?${this.state.city}")`,
@@ -44,7 +44,7 @@ class App extends React.Component {
         city: "Cannot Find City",
         weather: "Hopefully Sun",
         desc: "Something Nice",
-        icon: "http://openweathermap.org/img/wn/01n.png",
+        icon: "https://openweathermap.org/img/wn/01n.png",
         temp: 0,
         windSpeed: 0,
         background: `linear-gradient(#CFF, #FCC)`,
